@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/sportlased")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AthleteController {
 
     private final DecathlonService decathlonService;
@@ -38,5 +39,23 @@ public class AthleteController {
     @GetMapping("/{id}/punktisumma")
     public double getPunktisumma(@PathVariable Long id) {
         return decathlonService.getPunktisumma(id);
+    }
+
+    // Kustuta sportlane
+    @DeleteMapping("/{id}")
+    public void kustutaSportlane(@PathVariable Long id) {
+        decathlonService.kustutaSportlane(id);
+    }
+
+    // Filtreeri riigi järgi
+    @GetMapping("/filter")
+    public List<Athlete> filterRiigi(@RequestParam String riik) {
+        return decathlonService.filterRiigi(riik);
+    }
+
+    // Sorteeri punktisumma järgi
+    @GetMapping("/sort")
+    public List<Athlete> sortPunktisumma() {
+        return decathlonService.sortPunktisumma();
     }
 }

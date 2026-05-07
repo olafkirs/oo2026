@@ -43,4 +43,25 @@ public class DecathlonService {
                 .mapToDouble(Result::getTulemus)
                 .sum();
     }
+
+    public void kustutaSportlane(Long id) {
+        athleteRepository.deleteById(id);
+    }
+
+    public List<Athlete> filterRiigi(String riik) {
+        return athleteRepository.findByRiik(riik);
+    }
+
+    public List<Athlete> sortPunktisumma() {
+        return athleteRepository.findAll()
+                .stream()
+                .sorted((a, b) -> {
+                    double sumA = resultRepository.findByAthleteId(a.getId())
+                            .stream().mapToDouble(Result::getTulemus).sum();
+                    double sumB = resultRepository.findByAthleteId(b.getId())
+                            .stream().mapToDouble(Result::getTulemus).sum();
+                    return Double.compare(sumB, sumA);
+                })
+                .toList();
+    }
 }
