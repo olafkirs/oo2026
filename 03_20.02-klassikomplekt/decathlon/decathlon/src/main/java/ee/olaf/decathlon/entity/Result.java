@@ -1,5 +1,6 @@
 package ee.olaf.decathlon.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -17,6 +18,7 @@ public class Result {
     @Positive(message = "Tulemus peab olema positiivne.")
     private double tulemus;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "athlete_id")
     private Athlete athlete;

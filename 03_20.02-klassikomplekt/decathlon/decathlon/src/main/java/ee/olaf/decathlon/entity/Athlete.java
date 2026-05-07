@@ -1,11 +1,17 @@
 package ee.olaf.decathlon.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.Data;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Athlete {
     @Id
@@ -18,6 +24,7 @@ public class Athlete {
     @NotBlank(message = "Riik ei tohi olla tühi.")
     private String riik;
 
-    @OneToMany(mappedBy = "athlete", cascade = CascadeType.ALL)
-    private List<Result> tulemused;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "athlete", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Result> tulemused = new ArrayList<>();
 }

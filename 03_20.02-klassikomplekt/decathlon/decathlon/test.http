@@ -1,0 +1,7 @@
+POST http://localhost:8080/sportlased
+Content-Type: application/json
+
+{
+  "nimi": "Olaf",
+  "riik": "Eesti"
+}
