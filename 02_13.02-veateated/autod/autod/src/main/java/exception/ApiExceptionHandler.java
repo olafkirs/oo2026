@@ -12,8 +12,8 @@ import java.util.Date;
 public class ApiExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<ErrorMessage> handleException(RuntimeException ex) {
-        ErrorMessage errorMessage = new ErrorMessage();
+    public ResponseEntity<ee.olaf.autod.exception.ErrorMessage> handleException(RuntimeException ex) {
+        ee.olaf.autod.exception.ErrorMessage errorMessage = new ee.olaf.autod.exception.ErrorMessage();
         errorMessage.setMessage(ex.getMessage());
         errorMessage.setStatus(HttpStatus.BAD_REQUEST.value());
         errorMessage.setTimestamp(new Date());
@@ -21,8 +21,8 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<ErrorMessage> handleException(MissingServletRequestParameterException ex) {
-        ErrorMessage errorMessage = new ErrorMessage();
+    public ResponseEntity<ee.olaf.autod.exception.ErrorMessage> handleException(MissingServletRequestParameterException ex) {
+        ee.olaf.autod.exception.ErrorMessage errorMessage = new ee.olaf.autod.exception.ErrorMessage();
         errorMessage.setMessage("Jäi päringus parameeter puudu: " + ex.getMessage());
         errorMessage.setStatus(HttpStatus.BAD_REQUEST.value());
         errorMessage.setTimestamp(new Date());
